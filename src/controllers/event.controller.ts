@@ -261,6 +261,7 @@ export class EventController {
   }
 
   @Put("/:id")
+  @Authorized()
   async update(
     @Param("id") id: string,
     @Body({ validate: true }) body: UpdateEventBody
