@@ -11,7 +11,7 @@ export class SeedUsers1750302679042 implements MigrationInterface {
 
     await queryRunner.query(
       `INSERT INTO "user" (id, name, email, password) VALUES
-        ('f7b3eb6a-4d78-11f0-9fe2-0242ac120002', 'Matt Crandell', 'mrcrandell@gmail.com', $1),
+        ('f7b3eb6a-4d78-11f0-9fe2-0242ac120002', 'Matt Crandell', 'me@mattcrandell.com', $1),
         ('fe34b668-4d78-11f0-9fe2-0242ac120002', 'Kevin Courtney', 'fourgreenfieldsman@yahoo.com', $1)`,
       [passwordHash]
     );
