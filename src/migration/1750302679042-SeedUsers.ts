@@ -1,9 +1,13 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 import * as argon2 from "argon2";
+import * as dotenv from "dotenv";
+// Load environment variables
+dotenv.config();
 
 export class SeedUsers1750302679042 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const passwordHash = await argon2.hash("");
+    const plainPassword = process.env.DEFAULT_USER_PASSWORD || "changeme";
+    const passwordHash = await argon2.hash(plainPassword);
 
     await queryRunner.query(
       `INSERT INTO "user" (id, name, email, password) VALUES
