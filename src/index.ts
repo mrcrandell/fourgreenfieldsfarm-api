@@ -2,13 +2,10 @@ import "reflect-metadata";
 import { AppDataSource } from "./data-source";
 import express from "express";
 import * as dotenv from "dotenv";
-import { Request, Response } from "express";
 // import cors from "cors";
-// import { userRouter } from "./routes/user.routes";
-// import { movieRouter } from "./routes/movie.routes";
-import { eventRouter } from "./routes/event.routes";
 import { createExpressServer, Action } from "routing-controllers";
 import { EventController } from "./controllers/event.controller";
+import { EventImportController } from "./controllers/event-import.controller";
 import { UserController } from "./controllers/user.controller";
 import * as jwt from "jsonwebtoken";
 dotenv.config();
@@ -18,9 +15,6 @@ app.use(express.json());
 // app.use(errorHandler);
 const { PORT = 3000 } = process.env;
 // app.use(cors());
-// app.use("/auth", userRouter);
-// app.use("/api", movieRouter);
-// app.use("/api/events", eventRouter);
 
 /* app.all("*", (req: Request, res: Response) => {
   res.status(404).json({ message: "Route not found" });
@@ -31,7 +25,7 @@ console.log("Connecting to DB:", process.env.DB_NAME);
 AppDataSource.initialize()
   .then(async () => {
     const app = createExpressServer({
-      controllers: [EventController, UserController],
+      controllers: [EventController, EventImportController, UserController],
       routePrefix: "/api",
       authorizationChecker: async (action: Action, roles: string[]) => {
         const token = action.request.headers["authorization"]?.split(" ")[1];
