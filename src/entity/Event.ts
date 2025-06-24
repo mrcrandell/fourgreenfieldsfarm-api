@@ -41,6 +41,12 @@ export class Event {
   @Column({ nullable: true })
   hauntedBy!: string;
 
+  @Column({ nullable: true })
+  recurringEventId?: string; // references another Event ID
+
+  @Column({ nullable: true })
+  recurrenceRule?: string; // e.g. "FREQ=WEEKLY;BYDAY=WE;UNTIL=20251217"
+
   @CreateDateColumn({ type: "timestamptz" })
   createdAt!: Date;
 

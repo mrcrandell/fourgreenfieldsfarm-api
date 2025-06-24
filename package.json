@@ -28,12 +28,15 @@
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
     "routing-controllers": "^0.11.2",
+    "rrule": "^2.8.1",
     "typeorm": "0.3.24"
   },
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli"
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "migrations": "npm run typeorm migration:run -- -d src/data-source.ts",
+    "migrations:generate": "node generate-migration.js"
   }
 }

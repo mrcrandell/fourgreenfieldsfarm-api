@@ -1,15 +1,19 @@
 # Four Green Fields Farm API
 
-This is a Node.js REST API for Four Green Fields Farm, built with [TypeORM](https://typeorm.io/), [routing-controllers](https://github.com/typestack/routing-controllers), and PostgreSQL.
+A Node.js REST API for Four Green Fields Farm, built with [TypeORM](https://typeorm.io/), [routing-controllers](https://github.com/typestack/routing-controllers), and PostgreSQL.
+
+---
 
 ## Features
 
 - User authentication with Argon2 and JWT
-- Event management (CRUD)
+- Event management (CRUD, recurrence, grouping by day)
 - Query and validation for event filtering
-- Group events by day
 - Type-safe request validation with `class-validator`
-- Secure route authorization
+- Secure route authorization with JWT
+- Database migrations and seeding
+
+---
 
 ## Project Structure
 
@@ -22,6 +26,8 @@ src/
   data-source.ts    # TypeORM data source config
   index.ts          # App entry point
 ```
+
+---
 
 ## Getting Started
 
@@ -51,13 +57,14 @@ src/
    DB_PASS=your_db_password
    DB_NAME=your_db_name
    JWT_SECRET=your_jwt_secret
+   DEFAULT_USER_PASSWORD=changeme
    PORT=3000
    ```
 
 3. **Run database migrations:**
 
    ```sh
-   npm run typeorm migration:run
+   npm run migrations
    ```
 
 4. **Start the server:**
@@ -65,6 +72,8 @@ src/
    npm run dev
    ```
    The API will be available at `http://localhost:3000/api`.
+
+---
 
 ## API Overview
 
@@ -83,32 +92,53 @@ src/
   Returns events grouped by day with day label and day of month
 - `POST /api/events`
   (Requires Authorization header with Bearer token)
-  Create a new event
+  Create a new event (supports recurrence)
 - `PUT /api/events/:id`
-  (Requires Authorization header with Bearer token)
-  Update an event
+  Update an event (supports scope for recurring events)
+
+---
 
 ## Validation
 
 All request bodies and query parameters are validated using `class-validator`.
 Invalid requests return a 400 response with error details.
 
+---
+
 ## Authorization
 
 Protected routes use JWT-based authorization.
 Add `Authorization: Bearer <token>` to your requests.
 
+---
+
+## Migrations
+
+- **Generate a migration:**
+
+  ```sh
+  npm run migrations:generate -- MigrationName
+  ```
+
+  This will prompt you for a migration name and generate the file in `src/migration/`.
+
+- **Run migrations:**
+  ```sh
+  npm run migrations
+  ```
+
+---
+
 ## Development
 
 - Run in watch mode: `npm run dev`
-- Run migrations: `npm run typeorm migration:run`
-- Generate a new migration:
-  `npm run typeorm migration:generate -- -n MigrationName`
+- Build for production: `npm run build`
+- Start production build: `npm start`
+
+---
 
 ## License
 
 MIT
 
 ---
-
-\*Made with ❤️ for Four Green Fields
