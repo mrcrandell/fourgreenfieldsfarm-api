@@ -4,9 +4,11 @@ import express from "express";
 import * as dotenv from "dotenv";
 // import cors from "cors";
 import { createExpressServer, Action } from "routing-controllers";
+import { ContactController } from "./controllers/contact.controller";
 import { EventController } from "./controllers/event.controller";
 import { EventImportController } from "./controllers/event-import.controller";
 import { UserController } from "./controllers/user.controller";
+import { ValidationErrorHandler } from "./middleware/ValidationErrorHandler";
 import * as jwt from "jsonwebtoken";
 dotenv.config();
 
@@ -25,8 +27,16 @@ console.log("Connecting to DB:", process.env.DB_NAME);
 AppDataSource.initialize()
   .then(async () => {
     const app = createExpressServer({
-      controllers: [EventController, EventImportController, UserController],
+      controllers: [
+        ContactController,
+        EventController,
+        EventImportController,
+        UserController,
+      ],
       routePrefix: "/api",
+      middlewares: [ValidationErrorHandler],
+      validation: true,
+      defaultErrorHandler: false,
       authorizationChecker: async (action: Action, roles: string[]) => {
         const token = action.request.headers["authorization"]?.split(" ")[1];
         if (!token) return false;
