@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import { parse } from "@vue/compiler-sfc";
 import { collectAllVueStylesFrom } from "./collectVueStyles";
 import ContactEmail from "../src/emails/ContactEmail.vue";
+import ContactThankYouEmail from "../src/emails/ContactThankYouEmail.vue";
 
 // __dirname polyfill
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -20,6 +21,14 @@ const templates = [
       email: "{{email}}",
       phone: "{{phone}}",
       message: "{{message}}",
+      year: "{{year}}",
+    },
+  },
+  {
+    name: "contact-thank-you-email",
+    component: ContactThankYouEmail,
+    props: {
+      name: "{{name}}",
       year: "{{year}}",
     },
   },

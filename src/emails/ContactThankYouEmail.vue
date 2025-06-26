@@ -3,9 +3,6 @@ import EmailFooter from './components/EmailFooter.vue';
 import EmailHeader from './components/EmailHeader.vue';
 defineProps<{
   name: string;
-  email: string;
-  phone: string;
-  message: string;
   year: string | number;
 }>();
 </script>
@@ -15,12 +12,7 @@ defineProps<{
     <div class="content">
       <EmailHeader />
         <div class="body">
-          <h2>New Contact Message</h2>
-          <p><strong>Name:</strong> {{ name }}</p>
-          <p><strong>Email:</strong> {{ email }}</p>
-          <p><strong>Phone:</strong> {{ phone }}</p>
-          <p><strong>Message:</strong></p>
-          <p class="message">{{ message }}</p>
+          <p>We will get back to you as quickly as possible.</p>
         </div>
     </div>
     <EmailFooter :year="year" />
