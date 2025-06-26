@@ -2,7 +2,7 @@ const { execSync } = require("child_process");
 
 const name = process.argv[2];
 if (!name) {
-  console.error("Usage: node generate-migration.js <MigrationName>");
+  console.error("Usage: node scripts/generate-migration.js <MigrationName>");
   process.exit(1);
 }
 

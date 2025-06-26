@@ -3,6 +3,7 @@ import { JsonController, Post, Body, Res, HttpCode } from "routing-controllers";
 import { IsEmail, IsPhoneNumber, IsString } from "class-validator";
 import { Response } from "express";
 import { sendMail } from "../utils/email.util";
+import fs from "fs";
 
 class ContactBody {
   @IsString()
@@ -28,14 +29,14 @@ export class ContactController {
   ) {
     const { name, email, phone, message } = body;
 
-    const html = `
-      <h2>New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Message:</strong></p>
-      <p>${message}</p>
-    `;
+    const raw = fs.readFileSync("src/templates/contact-email.html", "utf-8");
+    const year = new Date().getFullYear();
+    const html = raw
+      .replace("{{name}}", name)
+      .replace("{{email}}", email)
+      .replace("{{phone}}", phone)
+      .replace("{{message}}", message)
+      .replace("{{year}}", String(year));
 
     try {
       await sendMail({
