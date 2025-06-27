@@ -1,9 +1,10 @@
 {
   "name": "fourgreenfieldsfarm-api",
   "version": "0.0.1",
-  "description": "Awesome project developed with TypeORM.",
+  "description": "Four Green Fields Farm API.",
   "type": "commonjs",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/multer": "^1.4.13",
     "@types/node": "^22.13.10",
     "ts-node": "^10.9.2",

@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { AppDataSource } from "./data-source";
 import express from "express";
 import * as dotenv from "dotenv";
-// import cors from "cors";
+import cors from "cors";
 import { createExpressServer, Action } from "routing-controllers";
 import { ContactController } from "./controllers/contact.controller";
 import { EventController } from "./controllers/event.controller";
@@ -13,6 +13,15 @@ import * as jwt from "jsonwebtoken";
 dotenv.config();
 
 const app = express();
+const isLocal = process.env.NODE_ENV === "development";
+const allowedOrigin = isLocal ? "*" : process.env.FRONTEND_URL;
+
+app.use(
+  cors({
+    origin: allowedOrigin,
+    credentials: true,
+  })
+);
 app.use(express.json());
 // app.use(errorHandler);
 const { PORT = 3000 } = process.env;
