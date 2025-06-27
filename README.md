@@ -22,7 +22,6 @@ src/
   controllers/      # API route controllers (routing-controllers)
   entity/           # TypeORM entities (database models)
   migration/        # TypeORM migrations
-  routes/           # (Legacy) Express route files
   data-source.ts    # TypeORM data source config
   index.ts          # App entry point
 ```
