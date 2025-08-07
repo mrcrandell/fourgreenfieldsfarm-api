@@ -1,4 +1,3 @@
-// src/controllers/eventImport.controller.ts
 import {
   JsonController,
   Post,

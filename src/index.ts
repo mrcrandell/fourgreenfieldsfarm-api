@@ -23,13 +23,7 @@ app.use(
   })
 );
 app.use(express.json());
-// app.use(errorHandler);
 const { PORT = 3000 } = process.env;
-// app.use(cors());
-
-/* app.all("*", (req: Request, res: Response) => {
-  res.status(404).json({ message: "Route not found" });
-}); */
 
 console.log("Connecting to DB:", process.env.DB_NAME);
 
@@ -46,7 +40,7 @@ AppDataSource.initialize()
       middlewares: [ValidationErrorHandler],
       validation: true,
       defaultErrorHandler: false,
-      authorizationChecker: async (action: Action, roles: string[]) => {
+      authorizationChecker: async (action: Action) => {
         const token = action.request.headers["authorization"]?.split(" ")[1];
         if (!token) return false;
 
@@ -55,9 +49,7 @@ AppDataSource.initialize()
             token,
             process.env.JWT_SECRET || "your_jwt_secret"
           );
-          // Optionally check roles here
-          // if (roles.length && !roles.includes(payload.role)) return false;
-          action.request.user = payload; // Attach user to request if needed
+          action.request.user = payload;
           return true;
         } catch {
           return false;

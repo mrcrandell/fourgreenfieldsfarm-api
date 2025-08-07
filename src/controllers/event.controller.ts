@@ -1,4 +1,3 @@
-// filepath: src/controllers/event.controller.ts
 import {
   JsonController,
   Get,
