@@ -45,11 +45,11 @@ async function renderEmailTemplate() {
     await fs.mkdir(path.dirname(outPath), { recursive: true });
     await fs.writeFile(outPath, inlined);
 
-    console.log(`✅ Rendered: ${name}.html`);
+    console.log(`Rendered: ${name}.html`);
   }
 }
 
 renderEmailTemplate().catch((err) => {
-  console.error("❌ Failed to build email template", err);
+  console.error("Failed to build email template", err);
   process.exit(1);
 });
