@@ -26,7 +26,7 @@ app.use(express.json());
 const { PORT = 3000 } = process.env;
 
 const useUrl = !!process.env.DATABASE_URL;
-console.log("Connecting to DB:", useUrl ? 'Supabase': process.env.DB_NAME);
+console.log("Connecting to DB:", useUrl ? process.env.DATABASE_URL: process.env.DB_NAME);
 
 AppDataSource.initialize()
   .then(async () => {
