@@ -50,7 +50,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli",
+    "typeorm": "typeorm-ts-node-commonjs",
     "migrations": "npm run typeorm migration:run -- -d src/data-source.ts",
     "migrations:generate": "node scripts/generate-migration.js",
     "email:preview": "vite",

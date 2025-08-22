@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource(
         synchronize: false,
         logging: true,
         entities: [Event, User],
-        migrations: ["src/migration/**/*.ts"],
+        migrations: ["migrations/*.js"],
       }
     : {
         type: "postgres",
@@ -27,6 +27,6 @@ export const AppDataSource = new DataSource(
         synchronize: false,
         logging: true,
         entities: [Event, User],
-        migrations: ["src/migration/**/*.ts"],
+        migrations: ["migrations/*.js"],
       }
 );
