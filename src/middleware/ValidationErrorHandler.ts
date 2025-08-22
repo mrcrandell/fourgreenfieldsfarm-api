@@ -15,9 +15,9 @@ export class ValidationErrorHandler implements ExpressErrorMiddlewareInterface {
   ): any {
     if (
       Array.isArray(error?.errors) &&
-      error.errors.every((e) => e instanceof ValidationError)
+      error.errors.every((e: any) => e instanceof ValidationError)
     ) {
-      const formatted = error.errors.map((e) => ({
+      const formatted = error.errors.map((e: any) => ({
         field: e.property,
         errors: Object.values(e.constraints || {}),
       }));
